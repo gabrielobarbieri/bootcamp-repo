@@ -1,62 +1,78 @@
 package main
 
-import "fmt"
+import (
+  "fmt"
+  "errors"
+)
 
 type Product interface {
-  price() float64
+  Price() float64
 }
 
 type smallProduct struct {
   productPrice float64
+  productType string 
 }
 
 type mediumProduct struct {
   productPrice float64
+  productType string
 }
 
 type bigProduct struct {
   productPrice float64
+  productType string 
 }
 
 // criar func factory -> métodos -> criar interface product (com metodo price)
-func (s smallProduct) price() float64 {
+func (s smallProduct) Price() float64 {
   return s.productPrice 
 }
 
-func (m mediumProduct) price() float64 {
+func (m mediumProduct) Price() float64 {
   return m.productPrice + ((m.productPrice * 0.03) * 2)
 }
 
-func (b bigProduct) price() float64 {
+func (b bigProduct) Price() float64 {
   return b.productPrice + (b.productPrice * 0.06) + 2500
 }
 
-func factory(productType string, productPrice float64) float64{
+// This func should receive a struct of type Product
+func factory(productPrice float64, productType string) (Product, error) {
   switch productType {
     case "small":
-      productInstance := smallProduct{productPrice}
-      return productInstance.price() 
+      return smallProduct{productPrice, productType}, nil
     case "medium":
-      productInstance := mediumProduct{productPrice}
-      return productInstance.price()
+      return mediumProduct{productPrice, productType}, nil
     case "big":
-      productInstance := bigProduct{productPrice}
-      return productInstance.price()
-    default: 
-      return 0.0 
+      return bigProduct{productPrice, productType}, nil
+    default:
+      return nil, errors.New("No product with this type")
   }
 }
 
 func main() {
-  bigProductPrice := factory("big", 1000)
+  bigProductPrice, err := factory(1000, "big")
   
-  fmt.Println(bigProductPrice)
+  if err != nil {
+    fmt.Println(err)
+    return
+  } 
+  fmt.Println("Big Product Price:", bigProductPrice.Price())
 
-  smallProductPrice := factory("small", 1000)
+  smallProductPrice, err := factory(1000, "small")
 
-  fmt.Println(smallProductPrice)
+  if err != nil {
+    fmt.Println(err)
+    return
+  } 
+  fmt.Println("Small Product Price:", smallProductPrice.Price())
 
-  mediumProductPrice := factory("medium", 1000)
+  mediumProductPrice, err := factory(1000, "medium")
 
-  fmt.Println(mediumProductPrice)
+  if err != nil {
+    fmt.Println(err)
+    return
+  } 
+  fmt.Println("Medium Product Price:", mediumProductPrice.Price())
 }
