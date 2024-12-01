@@ -5,19 +5,24 @@ import (
 )
 
 func TestCalcularNotas(t *testing.T) {
-	t.Run("Teste calcular média", func(t *testing.T) {
-		got := calcularNotas(8.5, 9.0, 7.5, 6.0, 8.0)
-		expected := 7.80
+  // Create input, create for loop, execute tests
 
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
+  tests := []struct {
+    description string
+    notas []float64
+    expected float64
+  } {
+    {"Notas zero", []float64{0, 0, 0}, 0.0},
+    {"Notas maiores que zero", []float64{1.0, 4.0, 7.0}, 4},
+    {"Notas maiores que zero", []float64{5.0, 5.0, 10.0, 0}, 5.0},
+  }
 
-		got = calcularNotas(2.0, 3.5, 9.0, 5.0)
-		expected = 4.875
-
-		if got != expected {
-			t.Errorf("esperado %.3f, obteve %.3f", expected, got)
-		}
-	})
+  for _, tt := range tests {
+    t.Run(tt.description, func(t *testing.T) {
+      got := calcularNotas(tt.notas...)
+      if tt.expected != got {
+        t.Errorf("expected: %.2f, got: %.2f", tt.expected, got)
+      }
+    })
+  }
 }

@@ -1,4 +1,4 @@
 # Exercício 2 - Calcular a média
+A escola relatou que as operações para calcular a média não estão sendo realizadas corretamente, portanto, agora somos obrigados a realizar os testes correspondentes:
 
-
-Uma escola precisa calcular a média (por aluno) de suas notas. É solicitado que ela gere uma função na qual possam ser passados N números inteiros e que retorne a média. Não é possível inserir notas negativas.
+1. Calcular a média das notas dos alunos.
