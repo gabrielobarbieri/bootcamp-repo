@@ -5,30 +5,23 @@ import (
 )
 
 func TestImposto(t *testing.T) {
-	got := imposto(20000)
-	expected := float64(0)
+  tests := []struct {
+    description string
+    salario float64
+    expected float64
+  }{
+    {"Teste sem imposto", 20000, 0},
+    {"Teste com imposto 17%", 60000, 10200},
+    {"Teste com imposto 27%", 170000, 45900},
+  }
+  
+  for _, tt := range tests {
+    t.Run(tt.description, func(t *testing.T) {
+      result := Imposto(tt.salario) 
 
-	t.Run("Teste nenhum imposto", func(t *testing.T) {
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
-	})
-
-	got = imposto(55000)
-	expected = 9350
-
-	t.Run("Teste 17% imposto", func(t *testing.T) {
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
-	})
-
-	got = imposto(200000)
-	expected = 54000
-
-	t.Run("Teste 27% imposto", func(t *testing.T) {
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
-	})
+      if result != tt.expected {
+        t.Errorf("expected: %.2f, got: %.2f", tt.expected, result)
+      }
+    })
+  }
 }

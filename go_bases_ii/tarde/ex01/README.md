@@ -1,7 +1,6 @@
-# Exercício 1 - Impostos sobre o salário
+# Exercício 1 - Teste de tributação salarial
+A empresa de chocolates que anteriormente precisava calcular o imposto de seus funcionários ao depositar seus salários agora nos pediu para validar se os cálculos desses impostos estão corretos. Para isso, eles nos pediram que realizássemos os testes correspondentes para:
 
-
-Uma empresa de chocolates precisa calcular o imposto de seus funcionários no momento de depositar o salário. Para cumprir o objetivo, é necessário criar uma função que retorne o imposto de um salário.
-
-
-Levando em conta que se a pessoa ganha mais de US$ 50.000, 17% do salário será deduzido e se a pessoa ganha mais de US$ 150.000, 10% também será deduzido (27% no total).
+1. Calcule o imposto caso o funcionário ganhe menos de US$ 50.000.
+2. Calcule o imposto caso o funcionário ganhe mais de US$ 50.000. 
+3. Calcule o imposto caso o funcionário ganhe mais de US$ 150.000.
