@@ -15,25 +15,29 @@ func (e *myError) Error() string {
 
 var lowSalaryError *myError = &myError{"Error: salary is less than 10000"}
 
-func imposto(salario float64) float64 {
+func imposto(salario float64) (float64, error) {
+  if salario <= 10000 {
+   return 0, lowSalaryError 
+  }
+
 	if salario < 50000 {
-		return 0
+		return 0, nil
 	} else if salario > 50000 && salario < 150000 {
-		return salario * 0.17
+		return salario * 0.17, nil
 	} else {
-		return salario * 0.27
+		return salario * 0.27, nil
 	}
 }
 
 func main() {
-  salary := 10000
+  var salary float64  
+  salary = 10000
 
-  e := lowSalaryError 
+  _, err := imposto(salary) 
 
   if salary <= 10000 { 
-    fmt.Println(errors.Is(e, lowSalaryError))
-    if errors.Is(e, lowSalaryError) {
-      fmt.Println("Error: ", e.Error())
+    if errors.Is(err, lowSalaryError) {
+      fmt.Println("Error: ", err.Error())
       return
     }
   }
