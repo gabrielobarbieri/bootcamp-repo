@@ -1,23 +1,39 @@
-# Exercício 3 - Registro de clientes
-O mesmo estudo do exercício anterior solicita uma funcionalidade para poder registrar novos dados de clientes. Os dados necessários são:
+# Exercício 3 - Registro de Clientes
 
-File
-Name
-ID
-Phone number
-Adress
+## Overview
+Este exercício visa desenvolver uma funcionalidade para registrar novos clientes. Os dados necessários para o registro incluem:
 
-- Atividade 1: Antes de registrar um cliente, é necessário verificar se o cliente já existe. Para fazer isso, você precisa ler os dados de uma matriz. Caso ele se repita, você precisa tratar o erro adequadamente, como vimos até agora. Esse erro deve:
-1.- gerar um panic;
+- File
+- Name
+- ID
+- Phone number
+- Address
 
-2.- console iniciar a mensagem: “Error: client already exists”, e continuar com a execução do programa normalmente.
+## Atividades
 
-- Atividade 2: Depois de tentar verificar se o cliente a ser registrado já existe, desenvolva uma função para validar se todos os dados a serem registrados para um cliente contêm um valor diferente de zero. Essa função deve retornar pelo menos dois valores. Um deles deverá ser do tipo erro, caso um valor zero seja inserido como parâmetro (lembre-se dos valores zero de cada tipo de dado, por exemplo: 0, “”, nil).
+### Atividade 1: Verificação de Cliente Existente
+Antes de registrar um cliente, é necessário verificar se ele já existe. Para isso, siga os passos:
 
-- Atividade 3: Antes de encerrar a execução, mesmo que ocorram panics, as seguintes mensagens devem ser impressas no console: “End of execution” e “Several errors were detected at runtime”. Use o defer  para atender a esse requisito..
+- Leia os dados de uma matriz.
+- Caso o cliente já exista, trate o erro adequadamente:
+  - Gere um panic.
+  - Exiba a mensagem no console: “Error: client already exists” e continue a execução do programa normalmente.
 
-Requisitos gerais:
+### Atividade 2: Validação de Dados
+Desenvolver uma função que valide se todos os dados do cliente contêm valores diferentes de zero. A função deve:
 
-- Use a recover para recuperar o valor de qualquer pânico que possa ocorrer.
-- Lembre-se de realizar as validações necessárias para cada retorno que possa conter um valor de erro.
-- Gere um erro, personalizando-o de acordo com sua preferência usando uma das funções Go (execute também a validação relevante para o caso de erro retornado).
+- Retornar pelo menos dois valores: um deles deve ser do tipo erro, que será gerado caso algum valor zero seja inserido (considerando os valores zero pertinentes a cada tipo: 0, "", nil, etc.).
+
+### Atividade 3: Mensagens Finais
+Antes de encerrar a execução, independentemente de ocorrerem panics, imprima no console as seguintes mensagens:
+
+- “End of execution”
+- “Several errors were detected at runtime”
+
+Utilize defer para atender a este requisito.
+
+## Requisitos Gerais
+
+- Use recover para capturar o valor de qualquer panic que possa ocorrer.
+- Realize as validações necessárias para cada retorno que possa conter um valor de erro.
+- Gere um erro personalizado conforme sua preferência, utilizando uma das funções disponíveis no Go, e valide adequadamente em caso de erro retornado.
