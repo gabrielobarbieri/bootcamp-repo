@@ -1,0 +1,2 @@
+Client: ID = 1, Name = John Doe, Phone = 1234567, Address = Avenue street
+Client: ID = 2, Name = Jane Roe, Phone = 7654321, Address = Boulevard avenue, 456
