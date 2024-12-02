@@ -5,23 +5,23 @@ import (
   "errors"
 )
 
-func animal(animalName string) (func(int) float64, error) {
+func animal(animalName string) (func(float64) float64, error) {
   switch animalName {  
     case "Cão":
-      return func(quantidade int) float64 {
-        return 10 * float64(quantidade)
+      return func(quantidade float64) float64 {
+        return 10 * quantidade
       }, nil
     case "Gato":
-      return func(quantidade int) float64 {
-        return 5 * float64(quantidade)
+      return func(quantidade float64) float64 {
+        return 5 * quantidade
       }, nil
     case "Hamster":
-      return func(quantidade int) float64 {
-        return 0.25 * float64(quantidade) 
+      return func(quantidade float64) float64 {
+        return 0.25 * quantidade
       }, nil
     case "Tarântula":
-      return func(quantidade int) float64 {
-        return 0.15 * float64(quantidade) 
+      return func(quantidade float64) float64 {
+        return 0.15 * quantidade
       }, nil
     default:
       return nil, errors.New("Animal não encontrado!")

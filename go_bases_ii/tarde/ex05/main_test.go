@@ -3,51 +3,28 @@ package main
 import "testing"
 
 func TestAnimal(t *testing.T) {
-	animalDog, msg := animal("Cão")
-	if msg != nil {
-		t.Fatal(msg)
-	}
-
-	animalCat, msg := animal("Gato")
-	if msg != nil {
-		t.Fatal(msg)
-	}
-
-	animalHamster, msg := animal("Hamster")
-	if msg != nil {
-		t.Fatal(msg)
-	}
-
-	animalTarantula, msg := animal("Tarântula")
-	if msg != nil {
-		t.Fatal(msg)
-	}
-
-	got := animalDog(10)
-	expected := float64(100)
-
-	if got != expected {
-		t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-	}
-
-	got = animalCat(10)
-	expected = float64(50)
-
-	if got != expected {
-		t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-	}
-
-	got = animalHamster(10)
-	expected = 2.5
-
-	if got != expected {
-		t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-	}
-
-	got = animalTarantula(10)
-	expected = 1.5
-
-	if got != expected {
-		t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-	}
-}
+  // Create tests table -> for loop -> assert
+  tests := []struct {
+    description string
+    animalName string
+    quantidade float64
+    expected float64
+  }{
+    {"Dog calculation", "Cão", 10.0, 100},
+    {"Cat calculation", "Gato", 0.5, 2.5},
+    {"Hamster calculation", "Hamster", 20.0, 5},
+    {"Tarântula calculation", "Tarântula", 30.0, 4.5},
+  }
+  
+  for _, tt := range tests {
+    t.Run(tt.description, func(t *testing.T) {
+      animalCalc, _ := animal(tt.animalName)
+      
+      got := animalCalc(tt.quantidade)
+      if tt.expected != got {
+        t.Errorf("expected: %.2f, got: %.2f", tt.expected, got)
+        return
+      }
+    })
+  }
+} 
