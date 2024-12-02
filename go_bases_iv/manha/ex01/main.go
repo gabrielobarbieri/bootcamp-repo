@@ -10,25 +10,28 @@ func (e *myError) Error() string {
   return e.errorMsg
 }
 
-func imposto(salario float64) float64 {
+func imposto(salario float64) (float64, error) {
+  if salario < 150000 {
+      return 0, &myError{"Error: the salary entered does not reach the taxable minimum"} 
+  } 
+
 	if salario < 50000 {
-		return 0
+		return 0, nil
 	} else if salario > 50000 && salario < 150000 {
-		return salario * 0.17
+		return salario * 0.17, nil
 	} else {
-		return salario * 0.27
+		return salario * 0.27, nil
 	}
 }
 
 func main() {
-  salary := 1000
+  var salario float64 = 1000
 
-  e := myError{"Error: the salary entered does not reach the taxable minimum"}
-
-  if salary < 150000 {
-    fmt.Println(e.Error())
+  _, err := imposto(salario)
+  if err != nil {
+    fmt.Println(err.Error())
     return
-  } 
+  }
 
   fmt.Println("Must pay tax")
 }
