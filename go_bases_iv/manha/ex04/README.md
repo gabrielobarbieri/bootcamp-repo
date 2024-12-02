@@ -1,4 +1,3 @@
-# Exercício 3 - Impostos sobre o salário #3
+# Exercício 4 - Impostos sobre o salário #4
 
-
-Faça o mesmo que no exercício anterior, mas reformule o código de modo que, em vez de "Error()", seja implementado "errors.New()".
+Repeti o processo anterior, mas agora implementando "fmt.Errorf()", para que a mensagem de erro receba como parâmetro o valor de "salary" indicando que ele não atinge o mínimo tributável (a mensagem exibida pelo console deve dizer:“Error: the minimum taxable amount is 150,000 and the salary entered is: [salary]”, sendo  [salary] o valor do tipo int passado pelo parâmetro).
