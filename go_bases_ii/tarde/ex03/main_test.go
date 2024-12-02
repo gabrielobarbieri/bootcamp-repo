@@ -3,26 +3,26 @@ package main
 import "testing"
 
 func TestCalculaSalario(t *testing.T) {
-	t.Run("Teste calcular salário", func(t *testing.T) {
-		got := calculaSalario(120, "C")
-		expected := float64(2000)
+  // Create tests table ->  for loop ->  assert behavior
+  tests := []struct { 
+    description string
+    minutos float64
+    categoria string
+    expected float64
+  }{
+    {"Teste categoria C", 120, "C", 2000},
+    {"Teste categoria B", 30, "B", 900},
+    {"Teste categoria A", 60, "A", 4500},
+  }
 
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
+  for _, tt := range tests {
+    t.Run(tt.description, func(t *testing.T) {
+      got := calculaSalario(tt.minutos, tt.categoria)
 
-		got = calculaSalario(180, "B")
-		expected = 5400
-
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
-
-		got = calculaSalario(0, "A")
-		expected = 0
-
-		if got != expected {
-			t.Errorf("esperado %.2f, obteve %.2f", expected, got)
-		}
-	})
+      if tt.expected != got {
+        t.Errorf("expected: %.2f, got: %.2f", tt.expected, got)
+        return 
+      }
+    })
+  }
 }

@@ -1,10 +1,6 @@
-# Exercício 3 - Calcular o salário
+# Exercício 3 - Teste de salário
+A empresa marítima não concorda com os resultados obtidos nos cálculos salariais e, por isso, pede que realizemos uma série de testes em nosso programa. Precisaremos realizar os seguintes testes em nosso código:
 
-Uma empresa marítima precisa calcular o salário de seus funcionários com base no número de horas trabalhadas por mês e na categoria.
-
-1. Categoria C, o salário deles é de US$ 1.000 por hora.
-2. Categoria B, o salário deles é de US$ 1.500 por hora, mais 20% do salário mensal.
-3. Categoria A, o salário deles é de US$ 3.000 por hora, mais 50% do salário mensal.
-
-
-### Você deve gerar uma função que receba como parâmetro o número de minutos trabalhados por mês, a categoria e retorne o salário.
+1. Calcule o salário da categoria "A".
+2. Calcule o salário da categoria "B".
+3. Calcule o salário da categoria "C".
