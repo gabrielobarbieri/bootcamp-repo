@@ -1,4 +1,4 @@
-package storage
+package service
 
 import (
 	"errors"
@@ -7,14 +7,12 @@ import (
 )
 
 var (
-	ErrStorageProductInternal = errors.New("storage: internal error")
+	ErrValidatorProductFieldRequired = errors.New("validator: product field required")
 
-	ErrStorageProductNotFound = errors.New("storage: product not found")
-
-	ErrStorageProductInvalid = errors.New("storage: product invalid")
+	ErrValidatorProductFieldInvalid = errors.New("validator: product field invalid")
 )
 
-type StorageProduct interface {
+type Service interface {
 	Get() (p []*model.Product, err error)
 	GetByID(id int) (p *model.Product, err error)
 	Search(price float64) (p []*model.Product, err error)

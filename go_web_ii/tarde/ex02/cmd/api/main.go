@@ -4,14 +4,23 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gabrielobarbieri/api-meli/cmd/handlers"
+	"github.com/gabrielobarbieri/api-meli/internal/controller"
+	"github.com/gabrielobarbieri/api-meli/internal/routes"
+	"github.com/gabrielobarbieri/api-meli/internal/service"
 	"github.com/gabrielobarbieri/api-meli/internal/storage"
 	"github.com/gabrielobarbieri/api-meli/internal/storage/loader"
 
-	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("%w: No .env file found, loading system environment variables", err)
+		return
+	}
+
 	ld := loader.NewLoaderJSON("../../docs/db/json/products.json")
 	DB, err := ld.Load()
 	if err != nil {
@@ -19,18 +28,12 @@ func main() {
 	}
 
 	st := storage.NewStorageProductMap(DB.DB, DB.LastId)
-	vl := storage.NewStorageProductValidate(storage.ConfigStorageProductValidate{St: st, RegexExpiration: ""})
-	ct := handlers.NewHandlerProducts(vl)
+	vl := service.NewStorageProductValidate(service.ConfigStorageProductValidate{St: st, RegexExpiration: ""})
+	ct := controller.NewHandlerProducts(vl)
 
 	rt := chi.NewRouter()
 
-	rt.Route("/products", func(r chi.Router) {
-		r.Get("/ping", ct.Ping)
-		r.Post("/", ct.Create)
-		r.Get("/", ct.Get)
-		r.Get("/{id}", ct.GetById)
-		r.Get("/search", ct.Search)
-	})
+	routes.RegisterProductRoutes(rt, ct)
 
 	fmt.Println("Listening on port :8080")
 
